@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mgg="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- 第二层布局:AppBarLayout(默认是竖向布局)包含:CollapsingToolbarLayout视差布局和TabLayout -->
+    <!-- APPBarLayout有默认的behavior.而他通过layout_scrollFlags来设置滚动的样式. -->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/id_appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stateListAnimator="@null">
+        <!--stateListAnimator:material design设计风格里边的按下抬起等状态.-->
+
+        <!-- 第三层: CollapsingToolbarLayout:第一个排列的有滚出的效果-->
+        <!-- layout_scrollFlags:滚动的方式. -->
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@android:color/transparent"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            <!-- contentScrim:内容纱布,根据滚动的位置是否到达一个阀值来决定是否对View“盖上纱布”。可以通过setContentScrim(Drawable)来设置纱布的图片,当然也还有setStatusBarScrim即设置状态栏的纱布但只能在LOLLIPOP设备上面有作用 -->
+            <!-- expandedTitleMarginStart|end:展开状态改变标题文字的位置，通过margin设置 -->
+
+            <!-- 第四层:排在CollapsingToolbarLayout的第一个子View -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@color/colorAccent"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <RelativeLayout
+                    android:id="@+id/staff_user_icon_cd"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@mipmap/staffmain_icon_bg">
+
+                    <ImageView
+                        android:id="@+id/staff_user_icon"
+                        android:layout_width="148dp"
+                        android:layout_height="148dp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/default_user_head_icon"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/author_name_certified"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/staff_user_icon_cd"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/staff_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:maxWidth="185dp"
+                        android:text="匿名匿名匿名"
+                        android:textColor="@color/c3"
+                        android:textSize="10dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/author_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/author_name_certified"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="美聚集官方设计总监"
+                    android:textColor="@color/c4"
+                    android:textSize="8dp"/>
+
+            </RelativeLayout>
+
+            <!-- 第四层: ToolBar在其顶部,可以放置头部标题等,ToolBar没什么特别特的主要代替了actiionBar,在这里主要是和外层的AppBarLayout进行了互动,Layout_scrollFlags -->
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tb_toolbar"
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:background="@color/c20"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <RelativeLayout
+                    android:id="@+id/staff_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#500000ff">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="这是一个标题"
+                        android:textColor="#000000"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <!-- 第三层: AppBarLayout的第二个子View,排在了第二个所以没有滚动的效果了-->
+        <android.support.design.widget.TabLayout
+            android:id="@+id/staff_main_tab"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="#20000000"
+            mgg:tabIndicatorColor="@color/c47"
+            mgg:tabIndicatorHeight="3dp"
+            mgg:tabSelectedTextColor="@color/c47"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!-- 第二层布局:跟随AppBarLayout,外层是CoordinatorLayout -->
+    <!-- ViewPager是主动触发的滚动按说是不需要配置behavior的,但是在这里不配置的话布局match_parent就会填充满整个屏幕 -->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/staff_main_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
+
+</android.support.design.widget.CoordinatorLayout>
