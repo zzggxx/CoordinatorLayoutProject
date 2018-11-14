@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class SimpleFragment extends Fragment {
 
     private View mView;
-    private RecyclerView mRecyclerview;
+    public RecyclerView mRecyclerview;
     private ArrayList<Integer> mArrayList = new ArrayList<>();
     private RecyclerViewAdapter mAdapter;
     private ImageView mDefaultIv;
