@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
     <!-- 第二层布局:AppBarLayout(默认是竖向布局)包含:CollapsingToolbarLayout视差布局和TabLayout -->
