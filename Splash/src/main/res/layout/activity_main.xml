@@ -11,6 +11,7 @@
 
     <!-- 第二层布局:AppBarLayout(默认是竖向布局)包含:CollapsingToolbarLayout视差布局和TabLayout -->
     <!-- APPBarLayout有默认的behavior.而他通过layout_scrollFlags来设置滚动的样式. -->
+    <!-- CollapsingToolbarLayoutshi 是折叠视图效果,若是不做的话只用内部的一个视图并且加上app:layout_scrollFlags="scroll|snap"也是可以滚动的 -->
     <android.support.design.widget.AppBarLayout
         android:id="@+id/id_appbarlayout"
         android:layout_width="match_parent"
@@ -20,7 +21,7 @@
 
         <!-- 第三层: CollapsingToolbarLayout:第一个排列的有滚出的效果-->
         <!-- layout_scrollFlags:滚动的方式. -->
-        <android.support.design.widget.CollapsingToolbarLayout
+        <!--<android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
@@ -30,7 +31,7 @@
             app:layout_scrollFlags="scroll|snap"
             >
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            android:minHeight="20dp"
+            android:minHeight="20dp"-->
 
             <!-- contentScrim:内容纱布,根据滚动的位置是否到达一个阀值来决定是否对View“盖上纱布”。可以通过setContentScrim(Drawable)来设置纱布的图片,当然也还有setStatusBarScrim即设置状态栏的纱布但只能在LOLLIPOP设备上面有作用 -->
             <!-- expandedTitleMarginStart|end:展开状态改变标题文字的位置，通过margin设置 -->
@@ -41,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
                 android:paddingBottom="10dp"
+                app:layout_scrollFlags="scroll|snap"
                 android:paddingTop="10dp">
                 android:layout_marginTop="30dp"
 
@@ -124,7 +126,7 @@
                            </RelativeLayout>
                        </android.support.v7.widget.Toolbar>-->
 
-        </android.support.design.widget.CollapsingToolbarLayout>
+        <!--</android.support.design.widget.CollapsingToolbarLayout>-->
 
         <!-- 第三层: AppBarLayout的第二个子View,排在了第二个所以没有滚动的效果了-->
         <android.support.design.widget.TabLayout
@@ -140,12 +142,18 @@
 
     <!-- 第二层布局:跟随AppBarLayout,外层是CoordinatorLayout -->
     <!-- ViewPager是主动触发的滚动按说是不需要配置behavior的,但是在这里不配置的话布局match_parent就会填充满整个屏幕 -->
+    <!-- RecyclerView也是需要加layout_behavior的不然就会充满整个控件的 -->
     <android.support.v4.view.ViewPager
         android:id="@+id/staff_main_vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
+
+    <!--<android.support.v7.widget.RecyclerView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_recycler_view"
